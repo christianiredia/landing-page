@@ -45,26 +45,30 @@ function navLinks() {
 
 // Add class 'active' to section when near top of viewport
 // on window scroll
-window.addEventListener("scroll", function () {
-  sections.forEach((section) => {
-    const topView = section.getBoundingClientRect().top;
-    if (topView > 0 && topView < 100) {
-      section.classList.add("active");
-    } else {
-      section.classList.remove("active");
-    }
-  });
-});
-
-// Scroll to anchor ID using scrollTO event
-document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth",
+function activeAtTop() {
+  window.addEventListener("scroll", function () {
+    sections.forEach((section) => {
+      const topView = section.getBoundingClientRect().top;
+      if (topView > 0 && topView < 100) {
+        section.classList.add("active");
+      } else {
+        section.classList.remove("active");
+      }
     });
   });
-});
+}
+
+// Scroll to anchor ID using scrollTO event
+function scrollToAnchor() {
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+  });
+}
 
 // Function to scroll back to to the top if user desires
 scrollToTop.addEventListener("click", function () {
@@ -78,3 +82,7 @@ scrollToTop.addEventListener("click", function () {
 
 // Build menu
 navLinks();
+
+activeAtTop();
+
+scrollToAnchor();
