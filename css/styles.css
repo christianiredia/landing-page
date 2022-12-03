@@ -61,6 +61,7 @@ section {
   position: relative;
   min-height: 80vh;
 }
+
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
@@ -72,18 +73,6 @@ section {
 
 .navbar__menu li {
   display: inline-block;
-  margin: 0.5rem 2rem;
-  padding: 1rem;
-}
-
-.navbar__menu a {
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-}
-
-.navbar__menu a:hover {
-  color: red;
 }
 
 .navbar__menu .menu__link {
