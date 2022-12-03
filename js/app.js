@@ -17,7 +17,7 @@
  * Define Global Variables
  *
  */
-const nav = document.querySelector("#navbar__list");
+const navs = document.querySelector("#navbar__list");
 const sections = document.querySelectorAll("section");
 /**
  * End Global Variables
@@ -33,15 +33,14 @@ const sections = document.querySelectorAll("section");
 
 // build the nav
 function navLinks() {
-  let navLi = "";
+  let navList = "";
   sections.forEach(function (section) {
     let sectionId = section.id;
     let sectionData = section.dataset.nav;
-    navLi += `<li><a class="navLink" href="#${sectionId}">${sectionData}</a></li>`;
+    navList += `<li><a class="menu__link" href="#${sectionId}">${sectionData}</a></li>`;
   });
-  nav.innerHTML = navLi;
+  navs.innerHTML = navList;
 }
-navLinks();
 // Add class 'active' to section when near top of viewport
 // on window scroll
 window.addEventListener("scroll", function () {
@@ -56,17 +55,14 @@ window.addEventListener("scroll", function () {
 });
 
 // Scroll to anchor ID using scrollTO event
-let navEl = document.querySelectorAll(".navLink");
-
-for (let i = 0; i < navEl.length; i++) {
-  let linkTop = navEl.getBoundingClientRect().top;
-  let linkLeft = navEl.getBoundingClientRect().left;
-  navEl[i].scrollTo({
-    top: linkTop,
-    left: linkLeft,
-    behavior: "smooth",
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior: "smooth",
+    });
   });
-}
+});
 
 /**
  * End Main Functions
@@ -75,6 +71,7 @@ for (let i = 0; i < navEl.length; i++) {
  */
 
 // Build menu
+navLinks();
 
 // Scroll to section on link click
 
