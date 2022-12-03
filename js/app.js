@@ -17,8 +17,9 @@
  * Define Global Variables
  *
  */
-const navs = document.querySelector("#navbar__list");
+const nav = document.querySelector("#navbar__list");
 const sections = document.querySelectorAll("section");
+const scrollToTop = document.querySelector(".scroll-to-top");
 /**
  * End Global Variables
  * Start Helper Functions
@@ -33,14 +34,15 @@ const sections = document.querySelectorAll("section");
 
 // build the nav
 function navLinks() {
-  let navList = "";
+  let navLi = "";
   sections.forEach(function (section) {
     let sectionId = section.id;
     let sectionData = section.dataset.nav;
-    navList += `<li><a class="menu__link" href="#${sectionId}">${sectionData}</a></li>`;
+    navLi += `<li><a class="menu__link" href="#${sectionId}">${sectionData}</a></li>`;
   });
-  navs.innerHTML = navList;
+  nav.innerHTML = navLi;
 }
+
 // Add class 'active' to section when near top of viewport
 // on window scroll
 window.addEventListener("scroll", function () {
@@ -64,6 +66,10 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
   });
 });
 
+// Function to scroll back to to the top if user desires
+scrollToTop.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 /**
  * End Main Functions
  * Begin Events
@@ -72,7 +78,3 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
 
 // Build menu
 navLinks();
-
-// Scroll to section on link click
-
-// Set sections as active
