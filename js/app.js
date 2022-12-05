@@ -45,12 +45,26 @@ function navLinks() {
 
 // Add class 'active' to section when near top of viewport
 // on window scroll
+//Styling the nav bar if section is active
 function activeAtTop() {
   window.addEventListener("scroll", function () {
+    let navHref = document.querySelectorAll("a");
     sections.forEach((section) => {
+      let sectionData = section.dataset.nav;
       const topView = section.getBoundingClientRect().top;
-      if (topView > 0 && topView < 100) {
+      if (topView >= 0 && topView <= 150) {
         section.classList.add("active");
+        navHref.forEach(function (nav) {
+          if (nav.textContent === sectionData) {
+            nav.style.textDecoration = "underline";
+            nav.style.color = "rgb(136 203 171)";
+            nav.style.fontSize = "1.2rem";
+          } else {
+            nav.style.textDecoration = "";
+            nav.style.color = "";
+            nav.style.fontSize = "";
+          }
+        });
       } else {
         section.classList.remove("active");
       }
@@ -74,6 +88,7 @@ function scrollToAnchor() {
 scrollToTop.addEventListener("click", function () {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
 /**
  * End Main Functions
  * Begin Events
